@@ -1,10 +1,16 @@
 package com.tekri.grunts.ui.screens.home
 
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowBack
@@ -13,6 +19,8 @@ import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
@@ -28,8 +36,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -38,6 +51,8 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.tekri.grunts.ui.theme.brown
 import com.tekri.grunts.ui.theme.oceanblue
+import com.tekri.grunts.R
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -124,29 +139,49 @@ fun HomeScreen(navController: NavController){
 
 
                 //Main Contents of the page
-                Text(text = "Welcome to Homescreen Screen", fontSize = 20.sp)
+                Text(text = "Welcome to Grunt", fontSize = 20.sp,
+                    textAlign = TextAlign.Center,
+                    fontWeight = FontWeight.ExtraBold, fontStyle = FontStyle.Italic)
                 Spacer(modifier = Modifier.height(8.dp))
-                Text("This is where the main content goes.")
+
+                Spacer(modifier = Modifier.width(20.dp))
+
+                Column (
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
+                ){
+                    Text(
+                        text = "The app consists of the following:"
+                    )
+                    Spacer(modifier = Modifier.width(20.dp))
+                    Text(
+                        text = "CLEANERS",
+                        fontSize = 30.sp,
+                        fontWeight = FontWeight.Bold,
+                        textAlign = TextAlign.Center
+                    )
+                    Image(
+                        painter = painterResource(R.drawable.workers),
+                        contentDescription = "product",
+                        modifier = Modifier.fillMaxWidth()
+                    )
 
 
-
-
-
-
-
-
-
-
-
+                }
 
             }
+
+
         }
     )
 
     //End of scaffold
 
 
-}
+    }
+
+
+
 
 @Preview(showBackground = true)
 @Composable
