@@ -11,6 +11,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowBack
@@ -135,6 +137,7 @@ fun HomeScreen(navController: NavController){
                 modifier = Modifier
                     .padding(paddingValues)
                     .fillMaxSize()
+                    .verticalScroll(rememberScrollState())
             ) {
 
 
@@ -161,10 +164,35 @@ fun HomeScreen(navController: NavController){
                         textAlign = TextAlign.Center
                     )
                     Image(
-                        painter = painterResource(R.drawable.workers),
+                        painter = painterResource(R.drawable.cleaners),
                         contentDescription = "product",
-                        modifier = Modifier.fillMaxWidth()
+                        modifier = Modifier.size(400.dp).padding(start = 10.dp, end = 10.dp)
                     )
+                    Text(
+                        text = "HANDYMEN",
+                        fontSize = 30.sp,
+                        fontWeight = FontWeight.Bold,
+                        textAlign = TextAlign.Center
+                    )
+
+                    Image(
+                        painter = painterResource(R.drawable.main),
+                        contentDescription = "product",
+                        modifier = Modifier.size(400.dp).padding(start = 10.dp, end = 10.dp)
+                    )
+                    Text(
+                        text = "EMPLOYER",
+                        fontSize = 30.sp,
+                        fontWeight = FontWeight.Bold,
+                        textAlign = TextAlign.Center,
+                    )
+                    Image(
+                        painter = painterResource(R.drawable.parent),
+                        contentDescription = "product",
+                        modifier = Modifier.size(400.dp).padding(start = 10.dp, end = 10.dp)
+                    )
+
+
 
 
                 }
