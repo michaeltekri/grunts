@@ -14,13 +14,15 @@ import com.tekri.grunts.ui.screens.auth.LoginScreen
 import com.tekri.grunts.ui.screens.auth.RegisterScreen
 import com.tekri.grunts.ui.screens.contact.ContactScreen
 import com.tekri.grunts.ui.screens.home.HomeScreen
+import com.tekri.grunts.ui.screens.people.ProfileScreen
+import com.tekri.grunts.ui.screens.splash.SplashScreen
 import com.tekri.grunts.viewmodel.AuthViewModel
 
 @Composable
 fun AppNavHost(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
-    startDestination: String = ROUT_HOME
+    startDestination: String = ROUT_SPLASH
 ) {
     val context= LocalContext.current
 
@@ -38,6 +40,12 @@ fun AppNavHost(
         }
         composable(ROUT_CONTACT) {
             ContactScreen(navController)
+        }
+        composable(ROUT_PROFILE) {
+            ProfileScreen(navController)
+        }
+        composable(ROUT_SPLASH) {
+           SplashScreen(navController)
         }
 
 
