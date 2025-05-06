@@ -13,7 +13,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.AddCircle
@@ -23,6 +25,7 @@ import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
@@ -47,6 +50,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.layout.ContentScale
@@ -59,7 +63,12 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.tekri.grunts.R
+import com.tekri.grunts.navigation.ROUT_CART
+import com.tekri.grunts.navigation.ROUT_HOME
+import com.tekri.grunts.navigation.ROUT_PICTURE
+import com.tekri.grunts.navigation.ROUT_PROFILE
 import com.tekri.grunts.ui.theme.Typography
+import com.tekri.grunts.ui.theme.cream
 import com.tekri.grunts.ui.theme.grey
 import com.tekri.grunts.ui.theme.oceanblue
 
@@ -95,34 +104,36 @@ fun PictureScreen(navController: NavController){
             ){
                 NavigationBarItem(
                     icon = { Icon(Icons.Default.Home, contentDescription = "Home") },
-                    label = { Text("Home") },
+                    label = { Text("Home", color = cream) },
                     selected = selectedIndex == 0,
                     onClick = { selectedIndex = 0
-                        // navController.navigate(ROUT_HOME)
+                         navController.navigate(ROUT_HOME)
                     }
                 )
                 NavigationBarItem(
                     icon = { Icon(Icons.Default.Favorite, contentDescription = "Favorites") },
-                    label = { Text("Favorites") },
+                    label = { Text("Favorites", color = cream) },
                     selected = selectedIndex == 1,
                     onClick = { selectedIndex = 1
-                        // navController.navigate(ROUT_HOME)
+                        navController.navigate(ROUT_CART)
                     }
                 )
                 NavigationBarItem(
                     icon = { Icon(Icons.Default.Person, contentDescription = "Profile") },
-                    label = { Text("Profile") },
+                    label = { Text("Profile" , color = cream) },
                     selected = selectedIndex == 2,
                     onClick = { selectedIndex = 2
-                        //  navController.navigate(ROUT_HOME)
+                          navController.navigate(ROUT_PICTURE)
                     }
-                )
+
+
+                    )
                 NavigationBarItem(
-                    icon = { Icon(Icons.Default.Info, contentDescription = "Profile") },
-                    label = { Text("info") },
+                    icon = { Icon(Icons.Default.Search, contentDescription = "Profile") },
+                    label = { Text("search", color = cream) },
                     selected = selectedIndex == 2,
                     onClick = { selectedIndex = 2
-                        //  navController.navigate(ROUT_HOME)
+                         navController.navigate(ROUT_PROFILE)
                     }
                 )
 
@@ -144,13 +155,17 @@ fun PictureScreen(navController: NavController){
                 modifier = Modifier
                     .padding(paddingValues)
                     .fillMaxSize()
+                    .verticalScroll(rememberScrollState())
+
             ) {
                 Card(
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier.fillMaxWidth().size(300.dp),
                     shape = RoundedCornerShape(bottomStart = 20.dp, bottomEnd = 20.dp),
+                    colors = CardDefaults.cardColors(cream)
 
 
-                    ) {
+
+                ) {
                     Column (
                         modifier = Modifier.fillMaxWidth(),
                         horizontalAlignment = Alignment.CenterHorizontally,
@@ -167,7 +182,7 @@ fun PictureScreen(navController: NavController){
                             alignment = Alignment.Center
                         )
                         IconButton(onClick = { }, modifier = Modifier.padding(5.dp).size(30.dp)) {
-                            Icon(painter = painterResource(R.drawable.camera),contentDescription = null)
+                            Icon(painter = painterResource(R.drawable.camera), contentDescription = null)
                         }
 
                         IconButton(

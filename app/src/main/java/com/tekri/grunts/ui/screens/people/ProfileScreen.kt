@@ -13,10 +13,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.CheckCircle
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Info
@@ -55,7 +58,12 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.tekri.grunts.R
+import com.tekri.grunts.navigation.ROUT_CART
+import com.tekri.grunts.navigation.ROUT_HOME
+import com.tekri.grunts.navigation.ROUT_PICTURE
+import com.tekri.grunts.navigation.ROUT_PROFILE
 import com.tekri.grunts.ui.theme.brown
+import com.tekri.grunts.ui.theme.cream
 import com.tekri.grunts.ui.theme.oceanblue
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -77,7 +85,7 @@ fun ProfileScreen(navController: NavController){
                        }
                    },
                    colors = TopAppBarDefaults.topAppBarColors(
-                       containerColor = brown,
+                       containerColor = oceanblue,
                        titleContentColor = Color.White,
                        navigationIconContentColor = Color.White
                    )
@@ -87,38 +95,38 @@ fun ProfileScreen(navController: NavController){
            //BottomBar
            bottomBar = {
                NavigationBar(
-                   containerColor =brown
+                   containerColor =oceanblue
                ){
                    NavigationBarItem(
                        icon = { Icon(Icons.Default.Home, contentDescription = "Home") },
-                       label = { Text("Home") },
+                       label = { Text("Home", color = cream) },
                        selected = selectedIndex == 0,
                        onClick = { selectedIndex = 0
-                           // navController.navigate(ROUT_HOME)
+                            navController.navigate(ROUT_HOME)
                        }
                    )
                    NavigationBarItem(
                        icon = { Icon(Icons.Default.Favorite, contentDescription = "Favorites") },
-                       label = { Text("Favorites") },
+                       label = { Text("Favorites", color = cream) },
                        selected = selectedIndex == 1,
                        onClick = { selectedIndex = 1
-                           // navController.navigate(ROUT_HOME)
+                            navController.navigate(ROUT_CART)
                        }
                    )
                    NavigationBarItem(
                        icon = { Icon(Icons.Default.Person, contentDescription = "Profile") },
-                       label = { Text("Profile") },
+                       label = { Text("Profile", color = cream) },
                        selected = selectedIndex == 2,
                        onClick = { selectedIndex = 2
-                           //  navController.navigate(ROUT_HOME)
+                             navController.navigate(ROUT_PICTURE)
                        }
                    )
                    NavigationBarItem(
-                       icon = { Icon(Icons.Default.Info, contentDescription = "Profile") },
-                       label = { Text("info") },
+                       icon = { Icon(Icons.Default.Search, contentDescription = "Profile") },
+                       label = { Text("info", color = cream) },
                        selected = selectedIndex == 2,
                        onClick = { selectedIndex = 2
-                           //  navController.navigate(ROUT_HOME)
+                           navController.navigate(ROUT_PROFILE)
                        }
                    )
 
@@ -129,7 +137,7 @@ fun ProfileScreen(navController: NavController){
            floatingActionButton = {
                FloatingActionButton(
                    onClick = { /* Add action */ },
-                   containerColor = brown
+                   containerColor = oceanblue
                ) {
                    Icon(Icons.Default.Add, contentDescription = "Add")
                }
@@ -140,13 +148,29 @@ fun ProfileScreen(navController: NavController){
                    modifier = Modifier
                        .padding(paddingValues)
                        .fillMaxSize()
+                       .verticalScroll(rememberScrollState())
+
                ) {
+                   //searchBar
+                   var search by remember { mutableStateOf("") }
+                   OutlinedTextField(
+                       value = search,
+                       onValueChange = {search=it},
+                       modifier = Modifier.fillMaxWidth().padding(start = 5.dp, end = 5.dp, top = 5.dp),
+                       leadingIcon = { Icon(imageVector = Icons.Default.Search, contentDescription = "") },
+                       placeholder = { Text(text="Search...") },
+                       shape = RoundedCornerShape(16.dp), // Rounded corners
+
+                   )
+
+                   //End of Searchbar
+
                    Row(
                        modifier = Modifier.padding(start = 20.dp, top = 30.dp),
                    ) {
                        Card (
                            modifier = Modifier.width(150.dp)
-                               .height(180.dp),
+                               .height(220.dp),
 
                            ){
 
@@ -170,8 +194,29 @@ fun ProfileScreen(navController: NavController){
                                Text(text = "Abel Kamau", fontSize = 15.sp, textAlign = TextAlign.Left)
                                Text(text = "Kisumu", fontSize = 15.sp, textAlign = TextAlign.Left)
                                Text(text = "Technician", fontSize = 15.sp, textAlign = TextAlign.Left)
+                               Spacer(modifier = Modifier.height(5.dp))
+
+                               Row(
+                               ) {
+                                   IconButton(
+                                       onClick = {},
+                                   ) {Icon(Icons.Default.Info
+                                       , contentDescription = "Profile")
+
+                                   }
+
+                                   IconButton(
+                                       onClick = {},
+                                   ) {Icon(Icons.Default.CheckCircle
+                                       , contentDescription = "Profile")
+
+                                   }
+                               }
+
+
 
                            }
+
 
 
 
@@ -182,7 +227,7 @@ fun ProfileScreen(navController: NavController){
                        Spacer(modifier = Modifier.width(50.dp))
                        Card(
                            modifier = Modifier.width(150.dp)
-                               .height(180.dp),
+                               .height(220.dp),
                        ) {
                            Column(
                                modifier = Modifier.fillMaxSize(),
@@ -204,6 +249,24 @@ fun ProfileScreen(navController: NavController){
                                Text(text = "Keegan Kyle", fontSize = 15.sp, textAlign = TextAlign.Left)
                                Text(text = "Mombasa", fontSize = 15.sp, textAlign = TextAlign.Left)
                                Text(text = "Plumber", fontSize = 15.sp, textAlign = TextAlign.Left)
+                               Spacer(modifier = Modifier.height(5.dp))
+
+                               Row(
+                               ) {
+                                   IconButton(
+                                       onClick = {},
+                                   ) {Icon(Icons.Default.Info
+                                       , contentDescription = "Profile")
+
+                                   }
+
+                                   IconButton(
+                                       onClick = {},
+                                   ) {Icon(Icons.Default.CheckCircle
+                                       , contentDescription = "Profile")
+
+                                   }
+                               }
 
                            }
                        }

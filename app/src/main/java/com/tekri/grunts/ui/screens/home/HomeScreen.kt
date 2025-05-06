@@ -21,6 +21,7 @@ import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -54,6 +55,11 @@ import androidx.navigation.compose.rememberNavController
 import com.tekri.grunts.ui.theme.brown
 import com.tekri.grunts.ui.theme.oceanblue
 import com.tekri.grunts.R
+import com.tekri.grunts.navigation.ROUT_CART
+import com.tekri.grunts.navigation.ROUT_HOME
+import com.tekri.grunts.navigation.ROUT_PICTURE
+import com.tekri.grunts.navigation.ROUT_PROFILE
+import com.tekri.grunts.ui.theme.cream
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -74,7 +80,7 @@ fun HomeScreen(navController: NavController){
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = brown,
+                    containerColor = oceanblue,
                     titleContentColor = Color.White,
                     navigationIconContentColor = Color.White
                 )
@@ -84,38 +90,39 @@ fun HomeScreen(navController: NavController){
         //BottomBar
         bottomBar = {
             NavigationBar(
-                containerColor = brown
+                containerColor =oceanblue
             ){
                 NavigationBarItem(
                     icon = { Icon(Icons.Default.Home, contentDescription = "Home") },
-                    label = { Text("Home") },
+                    label = { Text("Home", color = cream) },
                     selected = selectedIndex == 0,
                     onClick = { selectedIndex = 0
-                        // navController.navigate(ROUT_HOME)
+                         navController.navigate(ROUT_HOME)
                     }
                 )
                 NavigationBarItem(
                     icon = { Icon(Icons.Default.Favorite, contentDescription = "Favorites") },
-                    label = { Text("Favorites") },
+                    label = { Text("Favorites", color = cream) },
                     selected = selectedIndex == 1,
                     onClick = { selectedIndex = 1
-                        // navController.navigate(ROUT_HOME)
+                         navController.navigate(ROUT_CART)
                     }
+
                 )
                 NavigationBarItem(
                     icon = { Icon(Icons.Default.Person, contentDescription = "Profile") },
-                    label = { Text("Profile") },
+                    label = { Text("Profile", color = cream) },
                     selected = selectedIndex == 2,
                     onClick = { selectedIndex = 2
-                        //  navController.navigate(ROUT_HOME)
+                          navController.navigate(ROUT_PICTURE)
                     }
                 )
                 NavigationBarItem(
-                    icon = { Icon(Icons.Default.Info, contentDescription = "Profile") },
-                    label = { Text("info") },
+                    icon = { Icon(Icons.Default.Search, contentDescription = "Profile") },
+                    label = { Text("search", color = cream) },
                     selected = selectedIndex == 2,
                     onClick = { selectedIndex = 2
-                        //  navController.navigate(ROUT_HOME)
+                         navController.navigate(ROUT_PROFILE)
                     }
                 )
 
@@ -126,7 +133,7 @@ fun HomeScreen(navController: NavController){
         floatingActionButton = {
             FloatingActionButton(
                 onClick = { /* Add action */ },
-                containerColor = brown
+                containerColor = oceanblue
             ) {
                 Icon(Icons.Default.Add, contentDescription = "Add")
             }

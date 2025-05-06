@@ -12,8 +12,10 @@ import com.tekri.grunts.repository.UserRepository
 import com.tekri.grunts.ui.screens.about.AboutScreen
 import com.tekri.grunts.ui.screens.auth.LoginScreen
 import com.tekri.grunts.ui.screens.auth.RegisterScreen
+import com.tekri.grunts.ui.screens.cart.CartScreen
 import com.tekri.grunts.ui.screens.contact.ContactScreen
 import com.tekri.grunts.ui.screens.home.HomeScreen
+import com.tekri.grunts.ui.screens.people.PictureScreen
 import com.tekri.grunts.ui.screens.people.ProfileScreen
 import com.tekri.grunts.ui.screens.splash.SplashScreen
 import com.tekri.grunts.viewmodel.AuthViewModel
@@ -47,6 +49,13 @@ fun AppNavHost(
         composable(ROUT_SPLASH) {
            SplashScreen(navController)
         }
+        composable(ROUT_PICTURE) {
+            PictureScreen(navController)
+        }
+        composable(ROUT_CART) {
+            CartScreen(navController)
+        }
+
 
 
 
