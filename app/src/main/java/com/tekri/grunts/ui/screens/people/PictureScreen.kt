@@ -18,6 +18,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.AddCircle
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Info
@@ -47,6 +48,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.vectorResource
@@ -158,29 +160,23 @@ fun PictureScreen(navController: NavController){
                         Image(
                             painter = painterResource(R.drawable.profile),
                             contentDescription = "profile",
-                            modifier = Modifier.size(100.dp)
+                            modifier = Modifier
+                                .size(100.dp)
                                 .clip(androidx.compose.foundation.shape.CircleShape), // Clip to Circle
                             contentScale = ContentScale.Crop, // Ensures image is cropped to fit the circle
                             alignment = Alignment.Center
                         )
-                        Image(
-                            painter = painterResource(R.drawable.camera),
-                            contentDescription = "profile",
-                           modifier = Modifier.clickable {  }.size(30.dp),
-                            alignment = Alignment.Center
-                        )
-                        IconButton(onClick = onClick) {
-                            Image(
-                                painter = painterResource(id = R.drawable.camera),
-                                contentDescription = "Favorite",
-                                contentScale = ContentScale.Fit,
-                                modifier = Modifier.semantics {
-                                    contentDescription = "Favorite Button"
-                                }
-                            )
+                        IconButton(onClick = { }, modifier = Modifier.padding(5.dp).size(30.dp)) {
+                            Icon(painter = painterResource(R.drawable.camera),contentDescription = null)
                         }
 
-                        IconButton(onClick = {}, modifier = Modifier.align(alignment = Alignment.Start)) {Icon(Icons.Default.AddCircle, contentDescription = "Profile")}
+                        IconButton(
+                            onClick = {},
+                            modifier = Modifier.align(alignment = Alignment.Start)
+                        ) {Icon(Icons.Default.Edit
+                            , contentDescription = "Profile")
+
+                        }
 
 
 
