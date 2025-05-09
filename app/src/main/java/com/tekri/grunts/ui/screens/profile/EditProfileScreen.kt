@@ -23,6 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import com.tekri.grunts.model.Profile
+import com.tekri.grunts.navigation.ROUT_ADDPROFILE
 import com.tekri.grunts.viewmodel.ProfileViewModel
 
 
@@ -166,13 +167,13 @@ fun BottomNavigationBar2(navController: NavController) {
     ) {
         NavigationBarItem(
             selected = false,
-            onClick = { navController.navigate(ROUT_PRODUCT_LIST) },
+            onClick = { navController.navigate(ROUT_ADDPROFILE) },
             icon = { Icon(Icons.Default.Menu, contentDescription = "Product List") },
             label = { Text("Products") }
         )
         NavigationBarItem(
             selected = false,
-            onClick = { navController.navigate(ROUT_ADD_PRODUCT) },
+            onClick = { navController.navigate(ROUT_ADDPROFILE) },
             icon = { Icon(Icons.Default.Menu, contentDescription = "Add Product") },
             label = { Text("Add") }
         )

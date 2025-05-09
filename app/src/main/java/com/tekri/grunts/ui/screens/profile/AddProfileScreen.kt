@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import com.tekri.grunts.R
+import com.tekri.grunts.navigation.ROUT_ADDPROFILE
 import com.tekri.grunts.viewmodel.ProfileViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -183,13 +184,13 @@ fun BottomNavigationBar(navController: NavController) {
     ) {
         NavigationBarItem(
             selected = false,
-            onClick = { navController.navigate(ROUT_PRODUCT_LIST) },
+            onClick = { navController.navigate(ROUT_ADDPROFILE) },
             icon = { Icon(Icons.Default.Home, contentDescription = "Product List") },
             label = { Text("Home") }
         )
         NavigationBarItem(
             selected = false,
-            onClick = { navController.navigate(ROUT_ADD_PRODUCT) },
+            onClick = { navController.navigate(ROUT_ADDPROFILE) },
             icon = { Icon(Icons.Default.AddCircle, contentDescription = "Add Product") },
             label = { Text("Add") }
         )
@@ -197,7 +198,7 @@ fun BottomNavigationBar(navController: NavController) {
 
         NavigationBarItem(
             selected = false,
-            onClick = { navController.navigate(ROUT_ADD_PRODUCT) },
+            onClick = { navController.navigate(ROUT_ADDPROFILE) },
             icon = { Icon(painter = painterResource(R.drawable.profile), contentDescription = "") },
             label = { Text("Profile") }
         )
