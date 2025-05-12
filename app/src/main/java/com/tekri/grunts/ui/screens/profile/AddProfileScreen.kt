@@ -8,7 +8,9 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
@@ -26,26 +28,29 @@ import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import com.tekri.grunts.R
 import com.tekri.grunts.navigation.ROUT_ADDPROFILE
+import com.tekri.grunts.navigation.ROUT_PROFILE
 import com.tekri.grunts.viewmodel.ProfileViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddProfileScreen(navController: NavController, viewModel: ProfileViewModel) {
     var name by remember { mutableStateOf("") }
-    var price by remember { mutableStateOf("") }
+    var description by remember { mutableStateOf("") }
     var phone by remember { mutableStateOf("") }
+    var userId by remember { mutableIntStateOf(1) }
     var imageUri by remember { mutableStateOf<Uri?>(null) }
     var showMenu by remember { mutableStateOf(false) }
 
     val context = LocalContext.current
 
     // Image Picker Launcher
-    val imagePicker = rememberLauncherForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
-        uri?.let {
-            imageUri = it
-            Log.d("ImagePicker", "Selected image URI: $it")
+    val imagePicker =
+        rememberLauncherForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+            uri?.let {
+                imageUri = it
+                Log.d("ImagePicker", "Selected image URI: $it")
+            }
         }
-    }
 
     Scaffold(
         topBar = {
@@ -54,7 +59,10 @@ fun AddProfileScreen(navController: NavController, viewModel: ProfileViewModel) 
                 colors = TopAppBarDefaults.mediumTopAppBarColors(Color.LightGray),
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
-                        Icon(imageVector = Icons.Default.KeyboardArrowLeft, contentDescription = "Back")
+                        Icon(
+                            imageVector = Icons.Default.KeyboardArrowLeft,
+                            contentDescription = "Back"
+                        )
                     }
                 },
                 actions = {
@@ -68,14 +76,14 @@ fun AddProfileScreen(navController: NavController, viewModel: ProfileViewModel) 
                         DropdownMenuItem(
                             text = { Text("Product List") },
                             onClick = {
-                              //  navController.navigate(ROUT_PRODUCT_LIST)
+                                //  navController.navigate(ROUT_PRODUCT_LIST)
                                 showMenu = false
                             }
                         )
                         DropdownMenuItem(
                             text = { Text("Add Product") },
                             onClick = {
-                               // navController.navigate(ROUT_ADD_PRODUCT)
+                                // navController.navigate(ROUT_ADD_PRODUCT)
                                 showMenu = false
                             }
                         )
@@ -91,15 +99,21 @@ fun AddProfileScreen(navController: NavController, viewModel: ProfileViewModel) 
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(paddingValues)
-                    .padding(16.dp),
+                    .padding(16.dp)
+                    .verticalScroll(rememberScrollState()),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 // Product Name
                 OutlinedTextField(
                     value = name,
                     onValueChange = { name = it },
-                    label = { Text("Product Name") },
-                    leadingIcon = { Icon(painter = painterResource(R.drawable.profile), contentDescription = "Name") },
+                    label = { Text("Profile Name") },
+                    leadingIcon = {
+                        Icon(
+                            painter = painterResource(R.drawable.profile),
+                            contentDescription = "Name"
+                        )
+                    },
                     modifier = Modifier.fillMaxWidth()
                 )
 
@@ -107,10 +121,15 @@ fun AddProfileScreen(navController: NavController, viewModel: ProfileViewModel) 
 
                 // Product Price
                 OutlinedTextField(
-                    value = price,
-                    onValueChange = { price = it },
-                    label = { Text("Product Price") },
-                    leadingIcon = { Icon(painter = painterResource(R.drawable.on), contentDescription = "Price") },
+                    value = description,
+                    onValueChange = { description = it },
+                    label = { Text("description") },
+                    leadingIcon = {
+                        Icon(
+                            painter = painterResource(R.drawable.on),
+                            contentDescription = "Price"
+                        )
+                    },
                     modifier = Modifier.fillMaxWidth()
                 )
 
@@ -123,7 +142,12 @@ fun AddProfileScreen(navController: NavController, viewModel: ProfileViewModel) 
                     value = phone,
                     onValueChange = { phone = it },
                     label = { Text("Phone Number") },
-                    leadingIcon = { Icon(painter = painterResource(R.drawable.on), contentDescription = "Price") },
+                    leadingIcon = {
+                        Icon(
+                            painter = painterResource(R.drawable.on),
+                            contentDescription = "Price"
+                        )
+                    },
                     modifier = Modifier.fillMaxWidth()
                 )
 
@@ -147,7 +171,10 @@ fun AddProfileScreen(navController: NavController, viewModel: ProfileViewModel) 
                         )
                     } else {
                         Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                            Icon(painter = painterResource(R.drawable.on), contentDescription = "Pick Image")
+                            Icon(
+                                painter = painterResource(R.drawable.on),
+                                contentDescription = "Pick Image"
+                            )
                             Text("Tap to pick image", color = Color.DarkGray)
                         }
                     }
@@ -158,10 +185,11 @@ fun AddProfileScreen(navController: NavController, viewModel: ProfileViewModel) 
                 // Add Product Button
                 Button(
                     onClick = {
-                        val priceValue = price.toDoubleOrNull()
+                        val priceValue = description.toString()
                         if (priceValue != null) {
-                            imageUri?.toString()?.let { viewModel.addProfile(name, priceValue, phone,it) }
-                           // navController.navigate(ROUT_PRODUCT_LIST)
+                            imageUri?.toString()
+                                ?.let { viewModel.addProfile(name, priceValue, userId, phone, it) }
+                            navController.navigate(ROUT_PROFILE)
                         }
                     },
                     modifier = Modifier.fillMaxWidth(),
@@ -198,7 +226,7 @@ fun BottomNavigationBar(navController: NavController) {
 
         NavigationBarItem(
             selected = false,
-            onClick = { navController.navigate(ROUT_ADDPROFILE) },
+            onClick = { navController.navigate(ROUT_PROFILE) },
             icon = { Icon(painter = painterResource(R.drawable.profile), contentDescription = "") },
             label = { Text("Profile") }
         )

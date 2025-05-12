@@ -5,34 +5,37 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.tekri.grunts.data.ChatDatabase
+import androidx.navigation.navArgument
 import com.tekri.grunts.data.UserDatabase
-import com.tekri.grunts.repository.ChatRepository
 import com.tekri.grunts.repository.UserRepository
 import com.tekri.grunts.ui.screens.about.AboutScreen
 import com.tekri.grunts.ui.screens.auth.LoginScreen
 import com.tekri.grunts.ui.screens.auth.RegisterScreen
 import com.tekri.grunts.ui.screens.cart.CartScreen
-import com.tekri.grunts.ui.screens.communicate.CommuneScreen
 import com.tekri.grunts.ui.screens.contact.ContactScreen
 import com.tekri.grunts.ui.screens.home.HomeScreen
 import com.tekri.grunts.ui.screens.people.PictureScreen
 import com.tekri.grunts.ui.screens.people.ProfileScreen
+import com.tekri.grunts.ui.screens.profile.AddProfileScreen
+import com.tekri.grunts.ui.screens.profile.EditProfileScreen
 import com.tekri.grunts.ui.screens.splash.SplashScreen
 import com.tekri.grunts.viewmodel.AuthViewModel
-import com.tekri.grunts.viewmodel.ChatViewModel
-import com.tekri.grunts.viewmodel.ChatViewModelFactory
+import com.tekri.grunts.viewmodel.ProfileViewModel
+import com.tekri.grunts.viewmodel.ProfileViewModelFactory
 
 @Composable
 fun AppNavHost(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
-    startDestination: String = ROUT_COMMUNE
+    startDestination: String = ROUT_SPLASH,
+    profileViewModel: ProfileViewModel = viewModel(factory = ProfileViewModelFactory(context = LocalContext.current))
+
 ) {
-    val context= LocalContext.current
+    val context = LocalContext.current
 
 
     NavHost(
@@ -49,31 +52,34 @@ fun AppNavHost(
         composable(ROUT_CONTACT) {
             ContactScreen(navController)
         }
-        composable(ROUT_PROFILE) {
-            ProfileScreen(navController)
+        composable(route = ROUT_PROFILE) {
+            ProfileScreen(navController = navController, profileViewModel)
         }
         composable(ROUT_SPLASH) {
-           SplashScreen(navController)
+            SplashScreen(navController)
         }
-        composable(ROUT_PICTURE) {
-            PictureScreen(navController)
+        composable(
+            route = "$ROUT_PICTURE/{userId}",
+            arguments = listOf(navArgument("userId") { type = NavType.IntType })
+        ) { backStackEntry ->
+            val userId = backStackEntry.arguments?.getInt("userId") // Retrieve the userId
+            PictureScreen(navController, userId, profileViewModel)
         }
         composable(ROUT_CART) {
             CartScreen(navController)
         }
 
         composable(ROUT_ADDPROFILE) {
-            CartScreen(navController)
+            AddProfileScreen(navController, profileViewModel)
         }
-
-
-
-        composable(ROUT_COMMUNE) {
-            val chatDatabase = ChatDatabase.getDatabase(LocalContext.current)
-            val chatRepository = ChatRepository(chatDatabase.messageDao())
-            val chatViewModel: ChatViewModel = viewModel(factory = ChatViewModelFactory(chatRepository))
-
-            CommuneScreen(chatViewModel = chatViewModel) // ✅ Pass the instance
+        composable(
+            route = ROUT_EDIT_PROFILE,
+            arguments = listOf(navArgument("profileId") { type = NavType.IntType })
+        ) { backStackEntry ->
+            val profileId = backStackEntry.arguments?.getInt("profileId")
+            if (profileId != null) {
+                EditProfileScreen(profileId = profileId, navController, profileViewModel)
+            }
         }
 
 

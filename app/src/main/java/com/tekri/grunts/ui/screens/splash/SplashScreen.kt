@@ -25,7 +25,9 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.tekri.grunts.R
+import com.tekri.grunts.navigation.ROUT_ADDPROFILE
 import com.tekri.grunts.navigation.ROUT_HOME
+import com.tekri.grunts.navigation.ROUT_LOGIN
 import com.tekri.grunts.ui.theme.grey
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -37,7 +39,7 @@ fun SplashScreen(navController: NavController){
     val coroutine= rememberCoroutineScope()
     coroutine.launch {
         delay(2000)
-        navController.navigate(ROUT_HOME)
+        navController.navigate(ROUT_LOGIN)
 
 
     }

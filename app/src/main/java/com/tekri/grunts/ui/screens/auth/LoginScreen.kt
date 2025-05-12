@@ -27,6 +27,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.tekri.grunts.R
 import com.tekri.grunts.navigation.ROUT_ABOUT
+import com.tekri.grunts.navigation.ROUT_ADDPROFILE
 import com.tekri.grunts.navigation.ROUT_HOME
 
 
@@ -51,10 +52,10 @@ fun LoginScreen(
                 Toast.makeText(context, "Invalid Credentials", Toast.LENGTH_SHORT).show()
             } else {
                 if (user.role == "EMPLOYER") {
-                    navController.navigate(ROUT_HOME) {
+                    navController.navigate(ROUT_ADDPROFILE) {
                     }
                 } else {
-                    navController.navigate(ROUT_ABOUT) {
+                    navController.navigate(ROUT_ADDPROFILE) {
                     }
                 }
             }
@@ -65,13 +66,7 @@ fun LoginScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(20.dp)
-            .background(
-                brush = Brush.horizontalGradient(
-                    colors = listOf(Color(0xFF00C6FF), Color(0xFF0072FF))
-                ),
-            ),
-
+            .padding(20.dp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -130,7 +125,7 @@ fun LoginScreen(
                 .height(50.dp)
                 .background(
                     brush = Brush.horizontalGradient(
-                        colors = listOf(Color(0xFF4BC92E), Color(0xFF0072FF))
+                        colors = listOf(Color(0xFF2EAAC9), Color(0xFF0072FF))
                     ),
                     shape = RoundedCornerShape(12.dp)
                 ),

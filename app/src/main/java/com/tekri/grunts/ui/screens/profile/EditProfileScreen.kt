@@ -29,16 +29,16 @@ import com.tekri.grunts.viewmodel.ProfileViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun EditProfileScreen(productId: Int?, navController: NavController, viewModel: ProfileViewModel) {
+fun EditProfileScreen(profileId: Int?, navController: NavController, viewModel: ProfileViewModel) {
     val context = LocalContext.current
     val productList by viewModel.allProfile.observeAsState(emptyList())
 
     // Ensure productId is valid
-    val product = remember(productList) { productList.find { it.id == productId } }
+    val product = remember(productList) { productList.find { it.id == profileId } }
 
     // Track state variables only when product is found
     var name by remember { mutableStateOf(product?.name ?: "") }
-    var price by  remember { mutableStateOf(product?.price?.toString() ?: "") }
+    var description by  remember { mutableStateOf(product?.description?.toString() ?: "") }
     var imagePath by remember { mutableStateOf(product?.imagePath ?: "") }
     var showMenu by remember { mutableStateOf(false) }
 
@@ -104,9 +104,9 @@ fun EditProfileScreen(productId: Int?, navController: NavController, viewModel: 
                 Spacer(modifier = Modifier.height(8.dp))
 
                 OutlinedTextField(
-                    value = price,
-                    onValueChange = { price = it },
-                    label = { Text("Product Price") },
+                    value = description,
+                    onValueChange = { description = it },
+                    label = { Text("description") },
                     keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
                     modifier = Modifier.fillMaxWidth()
                 )
@@ -133,9 +133,9 @@ fun EditProfileScreen(productId: Int?, navController: NavController, viewModel: 
 
                 Button(
                     onClick = {
-                        val updatedPrice = price.toDoubleOrNull()
+                        val updatedPrice = description.toString()
                         if (updatedPrice != null) {
-                            viewModel.updateProfile(product.copy(name = name, price = updatedPrice, imagePath = imagePath))
+                            viewModel.updateProfile(product.copy(name = name, description = updatedPrice, imagePath = imagePath))
                             Toast.makeText(context, "Product Updated!", Toast.LENGTH_SHORT).show()
                             navController.popBackStack()
                         } else {

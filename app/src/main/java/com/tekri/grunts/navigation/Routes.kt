@@ -7,8 +7,8 @@ const val ROUT_PROFILE = "profile"
 const val ROUT_SPLASH= "splash"
 const val ROUT_PICTURE= "picture"
 const val ROUT_CART= "cart"
-const val ROUT_COMMUNE= "commune"
 const val ROUT_ADDPROFILE= "add profile"
+const val ROUT_EDIT_PROFILE= "edit profile/{profileId}"
 
 //Authentication
 const val ROUT_REGISTER = "Register"

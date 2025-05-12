@@ -4,12 +4,14 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.tekri.grunts.model.Profile
 import com.tekri.grunts.model.User
 import kotlin.jvm.java
 
-@Database(entities = [User::class], version = 2, exportSchema = false)
+@Database(entities = [User::class, Profile::class], version = 3, exportSchema = false)
 abstract class UserDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
+    abstract fun profileDao(): ProfileDao
 
     companion object {
         @Volatile

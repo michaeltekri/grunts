@@ -44,7 +44,7 @@ import com.tekri.grunts.ui.theme.oceanblue
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CartScreen(navController: NavController){
+fun CartScreen(navController: NavController) {
     //Scaffold
 
     var selectedIndex by remember { mutableIntStateOf(0) }
@@ -71,12 +71,13 @@ fun CartScreen(navController: NavController){
         bottomBar = {
             NavigationBar(
                 containerColor = oceanblue
-            ){
+            ) {
                 NavigationBarItem(
                     icon = { Icon(Icons.Default.Home, contentDescription = "Home") },
                     label = { Text("Home", color = cream) },
                     selected = selectedIndex == 0,
-                    onClick = { selectedIndex = 0
+                    onClick = {
+                        selectedIndex = 0
                         navController.navigate(ROUT_HOME)
                     }
                 )
@@ -84,26 +85,21 @@ fun CartScreen(navController: NavController){
                     icon = { Icon(Icons.Default.Favorite, contentDescription = "Favorites") },
                     label = { Text("Favorites", color = cream) },
                     selected = selectedIndex == 1,
-                    onClick = { selectedIndex = 1
-                         navController.navigate(ROUT_CART)
+                    onClick = {
+                        selectedIndex = 1
+                        navController.navigate(ROUT_CART)
                     }
                 )
                 NavigationBarItem(
                     icon = { Icon(Icons.Default.Person, contentDescription = "Profile") },
                     label = { Text("Profile", color = cream) },
                     selected = selectedIndex == 2,
-                    onClick = { selectedIndex = 2
-                          navController.navigate(ROUT_PICTURE)
+                    onClick = {
+                        selectedIndex = 2
+                        navController.navigate(ROUT_PROFILE)
                     }
                 )
-                NavigationBarItem(
-                    icon = { Icon(Icons.Default.Search, contentDescription = "Profile") },
-                    label = { Text("search", color = cream) },
-                    selected = selectedIndex == 2,
-                    onClick = { selectedIndex = 2
-                         navController.navigate(ROUT_PROFILE)
-                    }
-                )
+
 
             }
         },
@@ -126,19 +122,6 @@ fun CartScreen(navController: NavController){
             ) {
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
             }
         }
     )
@@ -146,11 +129,10 @@ fun CartScreen(navController: NavController){
     //End of scaffold
 
 
-
 }
 
 @Preview(showBackground = true)
 @Composable
-fun CartScreenPreview(){
-    CartScreen(navController= rememberNavController())
+fun CartScreenPreview() {
+    CartScreen(navController = rememberNavController())
 }

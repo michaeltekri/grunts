@@ -64,7 +64,7 @@ import com.tekri.grunts.ui.theme.cream
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen(navController: NavController){
+fun HomeScreen(navController: NavController) {
     //Scaffold
 
     var selectedIndex by remember { mutableIntStateOf(0) }
@@ -90,22 +90,24 @@ fun HomeScreen(navController: NavController){
         //BottomBar
         bottomBar = {
             NavigationBar(
-                containerColor =oceanblue
-            ){
+                containerColor = oceanblue
+            ) {
                 NavigationBarItem(
                     icon = { Icon(Icons.Default.Home, contentDescription = "Home") },
                     label = { Text("Home", color = cream) },
                     selected = selectedIndex == 0,
-                    onClick = { selectedIndex = 0
-                         navController.navigate(ROUT_HOME)
+                    onClick = {
+                        selectedIndex = 0
+                        navController.navigate(ROUT_HOME)
                     }
                 )
                 NavigationBarItem(
                     icon = { Icon(Icons.Default.Favorite, contentDescription = "Favorites") },
                     label = { Text("Favorites", color = cream) },
                     selected = selectedIndex == 1,
-                    onClick = { selectedIndex = 1
-                         navController.navigate(ROUT_CART)
+                    onClick = {
+                        selectedIndex = 1
+                        navController.navigate(ROUT_CART)
                     }
 
                 )
@@ -113,18 +115,12 @@ fun HomeScreen(navController: NavController){
                     icon = { Icon(Icons.Default.Person, contentDescription = "Profile") },
                     label = { Text("Profile", color = cream) },
                     selected = selectedIndex == 2,
-                    onClick = { selectedIndex = 2
-                          navController.navigate(ROUT_PICTURE)
+                    onClick = {
+                        selectedIndex = 2
+                        navController.navigate(ROUT_PROFILE)
                     }
                 )
-                NavigationBarItem(
-                    icon = { Icon(Icons.Default.Search, contentDescription = "Profile") },
-                    label = { Text("search", color = cream) },
-                    selected = selectedIndex == 2,
-                    onClick = { selectedIndex = 2
-                         navController.navigate(ROUT_PROFILE)
-                    }
-                )
+
 
             }
         },
@@ -149,17 +145,19 @@ fun HomeScreen(navController: NavController){
 
 
                 //Main Contents of the page
-                Text(text = "Welcome to Grunt", fontSize = 20.sp,
+                Text(
+                    text = "Welcome to Grunt", fontSize = 20.sp,
                     textAlign = TextAlign.Center,
-                    fontWeight = FontWeight.ExtraBold, fontStyle = FontStyle.Italic)
+                    fontWeight = FontWeight.ExtraBold, fontStyle = FontStyle.Italic
+                )
                 Spacer(modifier = Modifier.height(8.dp))
 
                 Spacer(modifier = Modifier.width(20.dp))
 
-                Column (
+                Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.Center
-                ){
+                ) {
                     Text(
                         text = "The app consists of the following:"
                     )
@@ -173,7 +171,9 @@ fun HomeScreen(navController: NavController){
                     Image(
                         painter = painterResource(R.drawable.cleaners),
                         contentDescription = "product",
-                        modifier = Modifier.size(400.dp).padding(start = 10.dp, end = 10.dp)
+                        modifier = Modifier
+                            .size(400.dp)
+                            .padding(start = 10.dp, end = 10.dp)
                     )
                     Text(
                         text = "HANDYMEN",
@@ -185,7 +185,9 @@ fun HomeScreen(navController: NavController){
                     Image(
                         painter = painterResource(R.drawable.main),
                         contentDescription = "product",
-                        modifier = Modifier.size(400.dp).padding(start = 10.dp, end = 10.dp)
+                        modifier = Modifier
+                            .size(400.dp)
+                            .padding(start = 10.dp, end = 10.dp)
                     )
                     Text(
                         text = "EMPLOYER",
@@ -196,10 +198,10 @@ fun HomeScreen(navController: NavController){
                     Image(
                         painter = painterResource(R.drawable.parent),
                         contentDescription = "product",
-                        modifier = Modifier.size(400.dp).padding(start = 10.dp, end = 10.dp)
+                        modifier = Modifier
+                            .size(400.dp)
+                            .padding(start = 10.dp, end = 10.dp)
                     )
-
-
 
 
                 }
@@ -213,13 +215,11 @@ fun HomeScreen(navController: NavController){
     //End of scaffold
 
 
-    }
-
-
+}
 
 
 @Preview(showBackground = true)
 @Composable
-fun HomeScreenPreview(){
-    HomeScreen(navController= rememberNavController())
+fun HomeScreenPreview() {
+    HomeScreen(navController = rememberNavController())
 }
