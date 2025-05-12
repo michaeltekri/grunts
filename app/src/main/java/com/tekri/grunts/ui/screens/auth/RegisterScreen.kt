@@ -145,7 +145,7 @@ fun RegisterScreen(
             visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
             leadingIcon = { Icon(Icons.Filled.Lock, contentDescription = "Password Icon") },
             trailingIcon = {
-                val image = if (passwordVisible) painterResource(R.drawable.visibility)  else painterResource(R.drawable.visibilityoff)
+                val image = if (passwordVisible) painterResource(R.drawable.on)  else painterResource(R.drawable.off)
                 IconButton(onClick = { passwordVisible = !passwordVisible }) {
                     Icon(image, contentDescription = if (passwordVisible) "Hide Password" else "Show Password")
                 }
@@ -181,7 +181,7 @@ fun RegisterScreen(
                 .height(50.dp)
                 .background(
                     brush = Brush.horizontalGradient(
-                        colors = listOf(Color(0xFF11FF00), Color(0xFF0072FF))
+                        colors = listOf(Color(0xFF2196F3), Color(0xFF0072FF))
                     ),
                     shape = MaterialTheme.shapes.medium
                 ),

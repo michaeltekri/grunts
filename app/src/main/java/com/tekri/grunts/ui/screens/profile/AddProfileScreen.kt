@@ -110,7 +110,7 @@ fun AddProfileScreen(navController: NavController, viewModel: ProfileViewModel) 
                     label = { Text("Profile Name") },
                     leadingIcon = {
                         Icon(
-                            painter = painterResource(R.drawable.profile),
+                            painter = painterResource(R.drawable.name),
                             contentDescription = "Name"
                         )
                     },
@@ -126,7 +126,7 @@ fun AddProfileScreen(navController: NavController, viewModel: ProfileViewModel) 
                     label = { Text("description") },
                     leadingIcon = {
                         Icon(
-                            painter = painterResource(R.drawable.on),
+                            painter = painterResource(R.drawable.describe),
                             contentDescription = "Price"
                         )
                     },
@@ -144,7 +144,7 @@ fun AddProfileScreen(navController: NavController, viewModel: ProfileViewModel) 
                     label = { Text("Phone Number") },
                     leadingIcon = {
                         Icon(
-                            painter = painterResource(R.drawable.on),
+                            painter = painterResource(R.drawable.phone),
                             contentDescription = "Price"
                         )
                     },

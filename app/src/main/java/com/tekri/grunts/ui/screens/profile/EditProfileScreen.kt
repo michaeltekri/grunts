@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.*
@@ -24,6 +25,7 @@ import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import com.tekri.grunts.model.Profile
 import com.tekri.grunts.navigation.ROUT_ADDPROFILE
+import com.tekri.grunts.navigation.ROUT_PROFILE
 import com.tekri.grunts.viewmodel.ProfileViewModel
 
 
@@ -38,17 +40,18 @@ fun EditProfileScreen(profileId: Int?, navController: NavController, viewModel: 
 
     // Track state variables only when product is found
     var name by remember { mutableStateOf(product?.name ?: "") }
-    var description by  remember { mutableStateOf(product?.description?.toString() ?: "") }
+    var description by remember { mutableStateOf(product?.description?.toString() ?: "") }
     var imagePath by remember { mutableStateOf(product?.imagePath ?: "") }
     var showMenu by remember { mutableStateOf(false) }
 
     // Image picker
-    val imagePicker = rememberLauncherForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
-        uri?.let {
-            imagePath = it.toString()
-            Toast.makeText(context, "Image Selected!", Toast.LENGTH_SHORT).show()
+    val imagePicker =
+        rememberLauncherForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+            uri?.let {
+                imagePath = it.toString()
+                Toast.makeText(context, "Image Selected!", Toast.LENGTH_SHORT).show()
+            }
         }
-    }
 
     Scaffold(
         topBar = {
@@ -70,14 +73,14 @@ fun EditProfileScreen(profileId: Int?, navController: NavController, viewModel: 
                         DropdownMenuItem(
                             text = { Text("Home") },
                             onClick = {
-                               // navController.navigate(ROUT_PRODUCT_LIST)
+                                // navController.navigate(ROUT_PRODUCT_LIST)
                                 showMenu = false
                             }
                         )
                         DropdownMenuItem(
                             text = { Text("Add Product") },
                             onClick = {
-                               // navController.navigate(ROUT_ADD_PRODUCT)
+                                // navController.navigate(ROUT_ADD_PRODUCT)
                                 showMenu = false
                             }
                         )
@@ -123,7 +126,8 @@ fun EditProfileScreen(profileId: Int?, navController: NavController, viewModel: 
 
                 Button(
                     onClick = { imagePicker.launch("image/*") },
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier
+                        .fillMaxWidth()
                         .padding(start = 40.dp, end = 40.dp),
                     colors = ButtonDefaults.buttonColors(Color.LightGray)
                 ) {
@@ -135,14 +139,22 @@ fun EditProfileScreen(profileId: Int?, navController: NavController, viewModel: 
                     onClick = {
                         val updatedPrice = description.toString()
                         if (updatedPrice != null) {
-                            viewModel.updateProfile(product.copy(name = name, description = updatedPrice, imagePath = imagePath))
+                            viewModel.updateProfile(
+                                product.copy(
+                                    name = name,
+                                    description = updatedPrice,
+                                    imagePath = imagePath
+                                )
+                            )
                             Toast.makeText(context, "Product Updated!", Toast.LENGTH_SHORT).show()
                             navController.popBackStack()
                         } else {
-                            Toast.makeText(context, "Invalid price entered!", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(context, "Invalid price entered!", Toast.LENGTH_SHORT)
+                                .show()
                         }
                     },
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier
+                        .fillMaxWidth()
                         .padding(start = 40.dp, end = 40.dp),
                     colors = ButtonDefaults.buttonColors(Color.Black)
                 ) {
@@ -173,8 +185,8 @@ fun BottomNavigationBar2(navController: NavController) {
         )
         NavigationBarItem(
             selected = false,
-            onClick = { navController.navigate(ROUT_ADDPROFILE) },
-            icon = { Icon(Icons.Default.Menu, contentDescription = "Add Product") },
+            onClick = { navController.navigate(ROUT_PROFILE) },
+            icon = { Icon(Icons.Default.Edit, contentDescription = "Add Product") },
             label = { Text("Add") }
         )
     }
